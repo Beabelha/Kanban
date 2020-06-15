@@ -1,0 +1,122 @@
+<mat-card class="page-card">
+    <h2>Fazer</h2>
+  
+    <button (click)="newTarefa()" class="botaoAdd" mat-fab color="primary">
+      <mat-icon>add</mat-icon>
+    </button>
+  
+    <button class="botaoAtualizar" mat-button color="primary" (click)="listar()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  
+    <div>
+      <mat-table  [dataSource]="tarefas">
+        <ng-container matColumnDef="nome">
+          <mat-header-cell *matHeaderCellDef>
+            Tarefa
+          </mat-header-cell>
+          <mat-cell  *matCellDef="let tarefa">
+            {{ tarefa.nome }}
+          </mat-cell>
+        </ng-container>
+  
+        <ng-container matColumnDef="desc">
+          <mat-header-cell *matHeaderCellDef>
+            Descrição
+          </mat-header-cell>
+          <mat-cell *matCellDef="let tarefa">
+            {{ tarefa.desc }}
+          </mat-cell>
+        </ng-container>
+  
+        <ng-container matColumnDef="prazo">
+          <mat-header-cell *matHeaderCellDef>
+            Prazo
+          </mat-header-cell>
+          <mat-cell *matCellDef="let tarefa">
+            {{ tarefa.prazo }}
+          </mat-cell>
+        </ng-container>
+  
+        <ng-container matColumnDef="tag">
+          <mat-header-cell *matHeaderCellDef>
+            Tag
+          </mat-header-cell>
+          <mat-cell *matCellDef="let tarefa">
+            {{ tarefa.tag }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef>
+            Status
+          </mat-header-cell>
+          <mat-cell *matCellDef="let tarefa">
+            {{ tarefa.status }}
+          </mat-cell>
+        </ng-container>
+  
+      
+  
+        <ng-container matColumnDef="acoes">
+          <mat-header-cell *matHeaderCellDef>
+            Ações
+          </mat-header-cell>
+          <mat-cell *matCellDef="let tarefa">
+            <button (click)="remover(tarefa._id)" mat-button color="primary">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button (click)="selecionar(tarefa)" mat-button color="primary">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+  
+        <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: colunas"></mat-row>
+      </mat-table>
+    </div>
+  
+    <div *ngIf="tarefaSelecionada" class="areaEdicao">
+      <h2>Inserir / Editar</h2>
+  
+      <mat-form-field class="formItem">
+        <mat-label>Tarefa</mat-label>
+        <input [(ngModel)]="tarefaSelecionada.nome" matInput />
+      </mat-form-field>
+  
+      <mat-form-field class="formItem">
+        <mat-label>Prazo</mat-label>
+        <input [(ngModel)]="tarefaSelecionada.prazo" matInput />
+      </mat-form-field>
+  
+      <mat-form-field class="formItem">
+        <mat-label>Descrição</mat-label>
+        <input [(ngModel)]="tarefaSelecionada.desc" matInput />
+      </mat-form-field>
+  
+      <mat-form-field class="formItem">
+        <mat-label>Tag</mat-label>
+        <input [(ngModel)]="tarefaSelecionada.tag" matInput />
+      </mat-form-field>
+
+      <!-- <mat-form-field class="formItem">
+        <mat-label>Estado</mat-label>
+        <input [(ngModel)]="tarefaSelecionada.status" matInput />
+      </mat-form-field> -->
+
+      <mat-form-field class="formItem">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="tarefaSelecionada.status">
+          <mat-option value="fazer">Fazer</mat-option>
+          <mat-option value="fazendo">Fazendo</mat-option>
+          <mat-option value="feito">Feito</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <button (click)="cancelar()" class="btnAcao" mat-raised-button color="primary">Cancelar</button>
+      <button (click)="salvar()" class="btnAcao" mat-raised-button color="accent">Salvar</button>
+    </div>
+  </mat-card>
+  
+  

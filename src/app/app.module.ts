@@ -11,26 +11,26 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { ClientComponent } from './views/client/client.component';
 import { AboutComponent } from './views/about/about.component';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { ToDoComponent } from './views/to-do/to-do.component';
 import { DoingComponent } from './views/doing/doing.component';
 import { DoneComponent } from './views/done/done.component';
+import { DoComponent } from './views/do/do.component';
+import {MatSelectModule} from '@angular/material/select';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClientComponent,
     AboutComponent,
-    ToDoComponent,
     DoingComponent,
-    DoneComponent
+    DoneComponent,
+    DoComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +46,8 @@ import { DoneComponent } from './views/done/done.component';
     HttpClientModule,
     MatTableModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
