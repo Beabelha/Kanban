@@ -11,45 +11,30 @@ export class DoComponent implements OnInit {
 
   tarefas: Array<Tarefa>;
   colunas = ['nome', 'desc', 'prazo', 'status', 'tag', 'acoes'];
-  status = 'fazer';
   tarefaSelecionada: Tarefa;
   inserindo = false;
 
   constructor(private kanbanService: KanbanService) { }
 
   ngOnInit(): void {
-    // this.listar();
+    this.listarFazer();
   }
 
-
-  listar() {
-      this.kanbanService.listarTarefas().subscribe(tarefas => {
-      this.tarefas = tarefas;
+listarFazer() {
+  this.kanbanService.listarTarefas().subscribe(tarefas => {
+  this.tarefas = tarefas;
+  const tarefasPraFazer = tarefas.filter(tarefa => tarefa.status === 'fazer');
+  return this.tarefas = tarefasPraFazer;
     });
-  }
-
-  listarFazer() {
-    if (this.status === 'fazer') {
-      this.kanbanService.listarTarefas().subscribe(tarefas => {
-      this.tarefas = tarefas;
-      });
-    }
 }
 
-  listarFazendo() {
-    if (this.status === 'fazendo') {
-      this.kanbanService.listarTarefas().subscribe(tarefas => {
-      this.tarefas = tarefas;
-      });
-    }
-}
-
+ 
   listarFeito() {
-    if (this.status === 'feito') {
       this.kanbanService.listarTarefas().subscribe(tarefas => {
       this.tarefas = tarefas;
-      });
-    }
+      const tarefasPraFazer = tarefas.filter(tarefa => tarefa.status === 'feito');
+      return this.tarefas = tarefasPraFazer;
+        });
 }
 
 
@@ -57,7 +42,7 @@ export class DoComponent implements OnInit {
   remover(id: string) {
     this.kanbanService.removerTarefa(id).subscribe(() => {
       alert('Tarefa removida');
-      this.listar();
+      this.listarFazer();
     });
   }
 
@@ -67,17 +52,18 @@ export class DoComponent implements OnInit {
   }
   cancelar() {
     this.tarefaSelecionada = null;
+    this.listarFazer();
   }
   salvar() {
     if (this.inserindo) {
       this.kanbanService.inserirTarefa(this.tarefaSelecionada).subscribe(() => {
         alert('Tarefa Salva');
-        this.listar();
+        this.listarFazer();
       });
     } else {
       this.kanbanService.atualizarTarefa(this.tarefaSelecionada).subscribe(() => {
         alert('Tarefa Atualizada');
-        this.listar();
+        this.listarFazer();
       });
     }
   }

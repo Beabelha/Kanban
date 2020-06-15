@@ -5,13 +5,14 @@
       <mat-icon>add</mat-icon>
     </button>
   
-    <button class="botaoAtualizar" mat-button color="primary" (click)="listar()">
+    <button class="botaoAtualizar" mat-button color="primary" (click)="listarFazer()">
       <mat-icon>refresh</mat-icon>
     </button>
   
     <div>
-      <mat-table  [dataSource]="tarefas">
-        <ng-container matColumnDef="nome">
+      <mat-table [dataSource]="tarefas">
+   <div>
+        <ng-container matColumnDef="nome" >
           <mat-header-cell *matHeaderCellDef>
             Tarefa
           </mat-header-cell>
@@ -55,9 +56,8 @@
             {{ tarefa.status }}
           </mat-cell>
         </ng-container>
-  
-      
-  
+        </div>
+
         <ng-container matColumnDef="acoes">
           <mat-header-cell *matHeaderCellDef>
             Ações
@@ -99,11 +99,6 @@
         <mat-label>Tag</mat-label>
         <input [(ngModel)]="tarefaSelecionada.tag" matInput />
       </mat-form-field>
-
-      <!-- <mat-form-field class="formItem">
-        <mat-label>Estado</mat-label>
-        <input [(ngModel)]="tarefaSelecionada.status" matInput />
-      </mat-form-field> -->
 
       <mat-form-field class="formItem">
         <mat-label>Status</mat-label>
