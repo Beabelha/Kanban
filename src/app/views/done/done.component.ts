@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Tarefa } from 'src/app/model/kanban';
 import { KanbanService } from 'src/app/services/kanban.service';
 
+interface Tags {
+  _id: string;
+  nomeTag: string;
+}
+
 @Component({
   selector: 'app-done',
   templateUrl: './done.component.html',
@@ -13,18 +18,29 @@ export class DoneComponent implements OnInit {
   colunas = ['nome', 'desc', 'prazo', 'status', 'tag', 'acoes'];
   tarefaSelecionada: Tarefa;
   inserindo = false;
+  tags: Tags[];
+
 
   constructor(private kanbanService: KanbanService) { }
 
   ngOnInit(): void {
     this.listarFeito();
+    this.listarTag();
   }
+
+  listarTag() {
+    this.kanbanService.listarTarefas().subscribe(tarefas => {
+      this.tags = tarefas;
+      const tags = tarefas.filter(tarefa => tarefa.nomeTag !== '');
+      this.tags = tags;
+     });
+}
 
   listarFeito() {
     this.kanbanService.listarTarefas().subscribe(tarefas => {
     this.tarefas = tarefas;
-    const tarefasPraFazer = tarefas.filter(tarefa => tarefa.status === 'feito');
-    return this.tarefas = tarefasPraFazer;
+    const tarefasFeitas = tarefas.filter(tarefa => tarefa.status === 'feito');
+    return this.tarefas = tarefasFeitas;
       });
   }
 

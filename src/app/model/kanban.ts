@@ -4,5 +4,5 @@ export class Tarefa {
     desc: string;
     prazo: string;
     status: string;
-    tag: string;
+    nomeTag: string;
   }

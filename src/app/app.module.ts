@@ -20,7 +20,9 @@ import { FormsModule } from '@angular/forms';
 import { DoingComponent } from './views/doing/doing.component';
 import { DoneComponent } from './views/done/done.component';
 import { DoComponent } from './views/do/do.component';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+
 
 
 
@@ -33,6 +35,7 @@ import {MatSelectModule} from '@angular/material/select';
     DoComponent
   ],
   imports: [
+    MatRadioModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

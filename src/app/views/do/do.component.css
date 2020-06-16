@@ -22,4 +22,9 @@
   .btnAcao{
     margin-right: 10px;
   }
-  
+  .ativar{
+    display: block;
+  }
+  .desativar{
+    display: none;
+  }
