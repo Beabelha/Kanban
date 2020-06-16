@@ -1,14 +1,62 @@
-<mat-card class="cardao">
-  <h2>Feitos</h2>
 
-  <button
-    class="botaoAtualizar"
-    mat-button
-    color="primary"
-    (click)="listarFeito()"
-  >
+<div *ngIf="tarefaSelecionada" class="areaEdicao">
+  <mat-card class="page-card inserir">
+<h2>Inserir / Editar</h2>
+<hr>
+<mat-form-field appearance="outline" class="formItem">
+  <mat-label>Tarefa</mat-label>
+  <input [(ngModel)]="tarefaSelecionada.nome" matInput />
+</mat-form-field>
+
+<mat-form-field appearance="outline" class="formItem">
+  <mat-label>Prazo</mat-label>
+    <input [(ngModel)]="tarefaSelecionada.prazo" matInput />
+</mat-form-field>
+
+<mat-form-field appearance="outline" class="formItem">
+  <mat-label>Descrição</mat-label>
+    <textarea [(ngModel)]="tarefaSelecionada.desc" matInput></textarea>
+</mat-form-field>
+
+<mat-form-field class="formItem">
+  <mat-label>Tags</mat-label>
+  <mat-select [(ngModel)]="tarefaSelecionada.nomeTag"  matInput>
+    <mat-option *ngFor="let tag of tags" [value]="tag.nome">
+       {{tag.nome}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="outline" color="primary" class="formItem">
+  <mat-label>Status</mat-label>
+  <mat-select color="primary" [(ngModel)]="tarefaSelecionada.status">
+    <mat-option value="fazer">Fazer</mat-option>
+    <mat-option value="fazendo">Fazendo</mat-option>
+    <mat-option value="feito">Feito</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<button (click)="cancelar()" class="btnAcao" mat-raised-button color="primary">Cancelar</button>
+<button (click)="salvar()" class="btnAcao" mat-raised-button color="accent">Salvar</button>
+</mat-card>
+</div>
+
+
+<mat-card class="cardao">
+  <h2>A fazer</h2>
+
+    <button class="botaoAtualizar" mat-button color="primary" (click)="listarFazer()">
     <mat-icon>refresh</mat-icon>
   </button>
+
+  <button (click)="newTarefa()" class="botaoAdd" mat-fab color="primary">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <button routerLink="/tag" mat-mini-fab class="botaoTag" mat-fab color="primary">
+    <mat-icon>label</mat-icon>
+  </button>
+
 
   <div>
     <mat-table [dataSource]="tarefas">
@@ -48,9 +96,8 @@
             {{ tarefa.nomeTag }}
           </mat-cell>
         </ng-container>
-
       </div>
-
+ 
       <ng-container matColumnDef="acoes">
         <mat-header-cell *matHeaderCellDef>
           Ações
@@ -69,53 +116,5 @@
       <mat-row *matRowDef="let row; columns: colunas"></mat-row>
     </mat-table>
   </div>
+ </mat-card>
 
-  <div *ngIf="tarefaSelecionada" class="areaEdicao">
-    <h2>Inserir / Editar</h2>
-
-    <mat-form-field class="formItem">
-      <mat-label>Tarefa</mat-label>
-      <input [(ngModel)]="tarefaSelecionada.nome" matInput />
-    </mat-form-field>
-
-    <mat-form-field class="formItem">
-      <mat-label>Prazo</mat-label>
-      <input [(ngModel)]="tarefaSelecionada.prazo" matInput />
-    </mat-form-field>
-
-    <mat-form-field class="formItem">
-      <mat-label>Descrição</mat-label>
-      <textarea [(ngModel)]="tarefaSelecionada.desc" matInput></textarea>
-    </mat-form-field>
-   
-   <mat-form-field class="formItem">
-      <mat-label>Tags</mat-label>
-      <mat-select [(ngModel)]="tarefaSelecionada.nomeTag"  matInput>
-        <mat-option *ngFor="let tag of tags" [value]="tag.nome">
-           {{tag.nome}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    
-    <mat-form-field class="formItem">
-      <mat-label>Status</mat-label>
-      <mat-select [(ngModel)]="tarefaSelecionada.status">
-        <mat-option value="fazer">A fazer</mat-option>
-        <mat-option value="fazendo">Em andamento</mat-option>
-        <mat-option value="feito">Concluído</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <button
-      (click)="cancelar()"
-      class="btnAcao"
-      mat-raised-button
-      color="primary"
-    >
-      Cancelar
-    </button>
-    <button (click)="salvar()" class="btnAcao" mat-raised-button color="accent">
-      Salvar
-    </button>
-  </div>
-</mat-card>

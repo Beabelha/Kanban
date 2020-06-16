@@ -1,5 +1,49 @@
 <mat-card class="page-card">
-  <h2>Aplicação de Exemplo</h2>
-  <p>Aplicações Interativas</p>
-  <p>Tecnologia em Sistemas para Internet - 2020</p>
+
+  <button (click)="voltar()" mat-mini-fab color="warn" class="botaoFechar">
+    <mat-icon>close</mat-icon>
+  </button>
+  
+  <h2>Kanban</h2>
+  <p>Olá, sou um kanban simples para o controle de tarefas, fui desenvolvido como parte de um trabalho do curso de
+    sistemas para internet! :)</p>
+  <hr style="border: 1px solid #7b1fa2;">
+  <span>Desenvolvido por: </span>
+
+  <mat-grid-list cols="2">
+
+    <mat-grid-tile>
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Beabelha</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image
+          src="https://ovicio.com.br/wp-content/uploads/2020/06/20200603-my-hero-academia-ochaco-uraraka-1200x675.jpeg"
+          alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <p>
+            #FicaEmcasa
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Josph</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="https://www.einerd.com.br/wp-content/uploads/2019/05/Miles-Morales-capa.png"
+          alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <p>
+            #TrancaOsVéio
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
 </mat-card>
+
+<br>

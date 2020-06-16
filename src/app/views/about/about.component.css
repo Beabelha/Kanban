@@ -1,0 +1,14 @@
+.example-card {
+    max-width: 200px;
+  }
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+  .botaoFechar {
+    position: absolute;
+    margin-top:10px;
+    margin-right: 10px;
+    right: 0;
+    top: 0;
+  }

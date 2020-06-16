@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { TagComponent } from './views/tag/tag.component';
 import { AboutComponent } from './views/about/about.component';
-import { ClientComponent } from './views/client/client.component';
-import { ToDoComponent } from './views/to-do/to-do.component';
-
+import { DoComponent } from './views/do/do.component';
+import { DoingComponent } from './views/doing/doing.component';
+import { DoneComponent } from './views/done/done.component';
 
 const routes: Routes = [
+  { path: 'tag', component: TagComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'client', component: ClientComponent },
-  { path: 'to-do', component: ClientComponent }
+  { path: 'do', component: DoComponent },
+  { path: 'doing', component: DoingComponent },
+  { path: 'done', component: DoneComponent }
 ];
 
 @NgModule({

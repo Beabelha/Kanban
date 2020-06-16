@@ -4,73 +4,85 @@ import { KanbanService } from 'src/app/services/kanban.service';
 import { TagsService } from 'src/app/services/tags.service';
 import { Tag } from 'src/app/model/tag';
 
-@Component({
-  selector: 'app-done',
-  templateUrl: './done.component.html',
-  styleUrls: ['./done.component.css']
-})
-export class DoneComponent implements OnInit {
 
+@Component({
+  selector: 'app-do',
+  templateUrl: './do.component.html',
+  styleUrls: ['./do.component.css']
+})
+
+export class DoComponent implements OnInit {
   tarefas: Array<Tarefa>;
+  tags: Array<Tag>;
   colunas = ['nome', 'desc', 'prazo', 'tag', 'acoes'];
   tarefaSelecionada: Tarefa;
   inserindo = false;
-  tags: Array<Tag>;
-
+  // tags: Tags[];
+  input = false;
 
   constructor(private kanbanService: KanbanService, private tagService: TagsService) { }
 
   ngOnInit(): void {
-    this.listarFeito();
+    this.listarFazer();
     this.atualizarTag();
+    // this.listarTag();
   }
 
-  atualizarTag() {
+
+atualizarTag() {
     this.tags = this.tagService.listarTag();
 }
 
-  listarFeito() {
+// listarTag() {
+//       this.kanbanService.listarTarefas().subscribe(tarefas => {
+//         this.tags = tarefas;
+//         const tags = tarefas.filter(tarefa => tarefa.nomeTag !== '');
+//         this.tags = tags;
+//           });
+// }
+
+  listarFazer() {
     this.kanbanService.listarTarefas().subscribe(tarefas => {
     this.tarefas = tarefas;
-    const tarefasFeitas = tarefas.filter(tarefa => tarefa.status === 'feito');
-    return this.tarefas = tarefasFeitas;
+    const tarefasPraFazer = tarefas.filter(tarefa => tarefa.status === 'fazer');
+    return this.tarefas = tarefasPraFazer;
       });
-  }
+}
 
   remover(id: string) {
     this.kanbanService.removerTarefa(id).subscribe(() => {
       alert('Tarefa removida');
-      this.listarFeito();
+      this.listarFazer();
     });
   }
 
   selecionar(tarefa: Tarefa) {
     this.inserindo = false;
     this.tarefaSelecionada = tarefa;
-  }
+    this.input = true;
 
-  cancelar() {
+  }
+    cancelar() {
     this.tarefaSelecionada = null;
-    this.listarFeito();
+    this.listarFazer();
   }
-
   salvar() {
     if (this.inserindo) {
       this.kanbanService.inserirTarefa(this.tarefaSelecionada).subscribe(() => {
-        alert('Tarefa Salva');
-        this.listarFeito();
+          alert('Tarefa Salva');
+          this.listarFazer();
       });
     } else {
       this.kanbanService.atualizarTarefa(this.tarefaSelecionada).subscribe(() => {
         alert('Tarefa Atualizada');
-        this.listarFeito();
+        this.listarFazer();
       });
     }
   }
 
   newTarefa() {
     this.inserindo = true;
+    this.input = false;
     this.tarefaSelecionada = new Tarefa();
   }
-
 }
