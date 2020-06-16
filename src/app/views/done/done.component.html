@@ -101,15 +101,10 @@
     </mat-form-field>
 
     <mat-form-field class="formItem">
-      <mat-label>Criar nova Tag </mat-label>
-      <input [(ngModel)]="tarefaSelecionada.nomeTag" matInput />
-    </mat-form-field>
-   
-   <mat-form-field class="formItem">
       <mat-label>Tags</mat-label>
       <mat-select [(ngModel)]="tarefaSelecionada.nomeTag"  matInput>
-        <mat-option *ngFor="let tag of tags" [value]="tag.nomeTag">
-           {{tag.nomeTag}}
+        <mat-option *ngFor="let tag of tags" [value]="tag.nome">
+           {{tag.nome}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -136,3 +131,5 @@
     </button>
   </div>
 </mat-card>
+
+<app-tag></app-tag>

@@ -22,6 +22,7 @@ import { DoneComponent } from './views/done/done.component';
 import { DoComponent } from './views/do/do.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
+import { TagComponent } from './views/tag/tag.component';
 
 
 
@@ -32,7 +33,8 @@ import { MatRadioModule } from '@angular/material/radio';
     AboutComponent,
     DoingComponent,
     DoneComponent,
-    DoComponent
+    DoComponent,
+    TagComponent
   ],
   imports: [
     MatRadioModule,

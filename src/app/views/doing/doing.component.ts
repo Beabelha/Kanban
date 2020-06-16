@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Tarefa } from 'src/app/model/kanban';
 import { KanbanService } from 'src/app/services/kanban.service';
-
-interface Tags {
-  _id: string;
-  nomeTag: string;
-}
-
+import { TagsService } from 'src/app/services/tags.service';
+import { Tag } from 'src/app/model/tag';
 
 @Component({
   selector: 'app-doing',
@@ -14,28 +10,22 @@ interface Tags {
   styleUrls: ['./doing.component.css']
 })
 export class DoingComponent implements OnInit {
-
+  tags: Array<Tag>;
   tarefas: Array<Tarefa>;
   colunas = ['nome', 'desc', 'prazo', 'status', 'tag', 'acoes'];
   tarefaSelecionada: Tarefa;
   inserindo = false;
-  tags: Tags[];
 
 
-  constructor(private kanbanService: KanbanService) { }
+  constructor(private kanbanService: KanbanService, private tagService: TagsService) { }
 
   ngOnInit(): void {
     this.listarFazendo();
-    this.listarTag();
-
+    this.atualizarTag();
   }
 
-listarTag() {
-      this.kanbanService.listarTarefas().subscribe(tarefas => {
-        this.tags = tarefas;
-        const tags = tarefas.filter(tarefa => tarefa.nomeTag !== '');
-        this.tags = tags;
-          });
+atualizarTag() {
+    this.tags = this.tagService.listarTag();
 }
 
 listarFazendo() {
